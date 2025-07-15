@@ -24,15 +24,29 @@ A Python-based tool that scans and displays detailed information about your devi
 ## Requirements
 
 - Python 3.x
-- `psutil`, `requests`, `rich`, `tkinter`, `beautifulsoup4`
+- psutil
+- requests
+- rich
+- beautifulsoup4
+- tkinter (usually included with Python)
 
-## Usage
+## Installation
 
-Run the script:
-```bash
-python main.py
-```
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/YOUR-USERNAME/Deviceandnetworkscanner.git
+   cd Deviceandnetworkscanner
+   ```
 
----
+2. Install the required Python packages:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Let me know if you want a more detailed README or instructions for deployment!
+3. Run the program:
+   ```bash
+   python main.py
+   ```
+
+> **Note:** On some systems, you may need to install `tkinter` separately. For example, on Ubuntu:  
+> `sudo apt-get install python3-tk`
