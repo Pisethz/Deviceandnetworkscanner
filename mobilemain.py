@@ -4,46 +4,22 @@ import subprocess
 from concurrent.futures import ThreadPoolExecutor
 import requests
 import psutil
-from rich.console import Console
-from rich.text import Text
-import requests
-from bs4 import BeautifulSoup
-import re
-import tkinter as tk
-from tkinter import scrolledtext, filedialog
 
-ascii_lines = [
-    " _____                _             _____                _             _   _                _   ",
-    "(___  )              ( )           (___  )              ( )           ( ) ( )              ( )_ ",
-    "    | |   _ _    ___ | |/')  _   _     | |   _ _    ___ | |/')  _   _ | |_| | _   _   ___  | ,_)",
-    " _  | | /'_` ) /'___)| , <  ( ) ( ) _  | | /'_` ) /'___)| , <  ( ) ( )|  _  |( ) ( )/' _ `\\| |  ",
-    "( )_| |( (_| |( (___ | |\\`\\ | (_) |( )_| |( (_| |( (___ | |\\`\\ | (_) || | | || (_) || ( ) || |_ ",
-    "`\\___/'`\\__,_)`\\____)(_) (_)`\\__, |`\\___/'`\\__,_)`\\____)(_) (_)`\\__, |(_) (_)`\\___/'(_) (_)`\\__)",
-    "                            ( )_| |                            ( )_| |                          ",
-    "                            `\\___/'                            `\\___/'                          ",
-    "",  # Blank line for spacing
-    "Pisethz x JackyJackyHunt"
-]
+# ASCII art banner with project name and authors
+ascii_banner = r'''
+ _____                _             _____                _             _   _                _   
+(___  )              ( )           (___  )              ( )           ( ) ( )              ( )_ 
+    | |   _ _    ___ | |/')  _   _     | |   _ _    ___ | |/')  _   _ | |_| | _   _   ___  | ,_)
+ _  | | /'_` ) /'___)| , <  ( ) ( ) _  | | /'_` ) /'___)| , <  ( ) ( )|  _  |( ) ( )/' _ `\| |  
+( )_| |( (_| |( (___ | |\`\ | (_) |( )_| |( (_| |( (___ | |\`\ | (_) || | | || (_) || ( ) || |_ 
+`\___/'`\__,_)`\____)(_) (_)`\__, |`\___/'`\__,_)`\____)(_) (_)`\__, |(_) (_)`\___/'(_) (_)`\__)
+                            ( )_| |                            ( )_| |                          
+                            `\___/'                            `\___/'                          
 
+Pisethz x JackyJackyHunt
+'''
 
-console = Console()
-
-def modern_gradient_print(line, start_color="#ff00cc", end_color="#00ccff"):
-    gradient_text = Text()
-    length = len(line)
-    for i, char in enumerate(line):
-        # Calculate the RGB step from start to end
-        ratio = i / max(length - 1, 1)
-        r = int((1 - ratio) * int(start_color[1:3], 16) + ratio * int(end_color[1:3], 16))
-        g = int((1 - ratio) * int(start_color[3:5], 16) + ratio * int(end_color[3:5], 16))
-        b = int((1 - ratio) * int(start_color[5:7], 16) + ratio * int(end_color[5:7], 16))
-        color = f"#{r:02x}{g:02x}{b:02x}"
-        gradient_text.append(char, style=color)
-    console.print(gradient_text)
-
-console.clear()
-for line in ascii_lines:
-    modern_gradient_print(line, start_color="#ff6ec7", end_color="#6effff")  # neon pink → cyan
+# Removed tkinter and ascii art banner
 
 def print_and_collect(text, output):
     print(text)
@@ -140,35 +116,12 @@ def scan_network(output):
     for ip in active_ips:
         print_and_collect(ip, output)
 
-def show_popup(result_text):
-    root = tk.Tk()
-    root.title("Network Scan Results")
-    root.geometry("800x600")
-    text_area = scrolledtext.ScrolledText(root, wrap=tk.WORD, font=("Consolas", 10))
-    text_area.pack(expand=True, fill='both')
-    # Add ascii art at the top
-    ascii_banner = '\n'.join(ascii_lines)
-    text_area.insert(tk.END, ascii_banner + '\n\n' + result_text)
-    text_area.config(state=tk.DISABLED)
-
-    def export_to_txt():
-        file_path = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("Text files", "*.txt")])
-        if file_path:
-            with open(file_path, 'w', encoding='utf-8') as f:
-                f.write(ascii_banner + '\n\n' + result_text)
-
-    export_btn = tk.Button(root, text="Export to Text", command=export_to_txt)
-    export_btn.pack(pady=10)
-    root.mainloop()
-
 if __name__ == "__main__":
-    console.clear()
-    for line in ascii_lines:
-        modern_gradient_print(line, start_color="#ff6ec7", end_color="#6effff")
+    print(ascii_banner)
     output = []
     print_all_network_info(output)
     print_local_ip(output)
     print_ip_info(output)
     scan_network(output)
-    result_text = '\n'.join(output)
-    show_popup(result_text)
+    # Print all results to CLI
+    # (Already printed in print_and_collect)
