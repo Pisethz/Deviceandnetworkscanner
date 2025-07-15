@@ -1,3 +1,4 @@
+# 🛰️ Device and Network Scanner dependencies
 psutil
 requests
 rich
