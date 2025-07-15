@@ -34,7 +34,7 @@ A Python-based tool that scans and displays detailed information about your devi
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/YOUR-USERNAME/Deviceandnetworkscanner.git
+   git clone https://github.com/Pisethz/Deviceandnetworkscanner.git
    cd Deviceandnetworkscanner
    ```
 
